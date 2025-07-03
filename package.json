@@ -8,7 +8,7 @@
     "build": "tsc",
     "build:dev": "tsc --watch",
     "start": "node .",
-    "start:dev": "node . -w",
+    "start:dev": "node --watch .",
     "lint": "oxlint src",
     "lint:fix": "oxlint src --fix"
   },
