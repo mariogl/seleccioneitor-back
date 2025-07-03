@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { applicationService } from "../service/application.service.js";
-import type { ApplicationsResponse } from "../types.js";
+import type { ApplicationsResponse, NewApplication } from "../types.js";
 
 export class ApplicationController {
   async getAllApplications(
@@ -12,11 +12,37 @@ export class ApplicationController {
       const applications = await applicationService.getAllApplications();
 
       const response: ApplicationsResponse = {
-        data: applications,
+        applications: applications,
         count: applications.length,
       };
 
       res.status(200).json(response);
+    } catch (error) {
+      console.error("Controller error:", error);
+      next(error);
+    }
+  }
+
+  async createApplication(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const applicationData = req.body as NewApplication;
+
+      // Convert date strings to Date objects if present
+      if (applicationData.availableStartDate) {
+        applicationData.availableStartDate = new Date(
+          applicationData.availableStartDate
+        );
+      }
+
+      const newApplication = await applicationService.createApplication(
+        applicationData
+      );
+
+      res.status(201).json(newApplication);
     } catch (error) {
       console.error("Controller error:", error);
       next(error);

@@ -12,7 +12,7 @@ describe("GET /applications", () => {
     expect(body.count).toBe(7);
 
     seedApplicationsData.forEach((expectedApp, index) => {
-      const actualApp = body.data[index];
+      const actualApp = body.applications[index];
       expect(actualApp.positionTitle).toBe(expectedApp.positionTitle);
       expect(actualApp.company).toBe(expectedApp.company);
       expect(actualApp.status).toBe(expectedApp.status);

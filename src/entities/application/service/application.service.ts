@@ -1,4 +1,4 @@
-import type { Application } from "../types.js";
+import type { Application, NewApplication } from "../types.js";
 import type { ApplicationRepository } from "../repository/application.repository.interface.js";
 import { DrizzleApplicationRepository } from "../repository/drizzle-application.repository.js";
 
@@ -11,6 +11,17 @@ export class ApplicationService {
     } catch (error) {
       console.error("Error fetching applications:", error);
       throw new Error("Failed to fetch applications");
+    }
+  }
+
+  async createApplication(
+    applicationData: NewApplication
+  ): Promise<Application> {
+    try {
+      return await this.applicationRepository.create(applicationData);
+    } catch (error) {
+      console.error("Error creating application:", error);
+      throw new Error("Failed to create application");
     }
   }
 }

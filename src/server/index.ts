@@ -6,6 +6,8 @@ import { applicationRouter } from "../entities/application/routes/application.ro
 
 const app = express();
 
+app.use(express.json());
+
 app.get("/", checkHealth);
 
 app.use("/applications", applicationRouter);

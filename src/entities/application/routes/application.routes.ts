@@ -8,4 +8,9 @@ applicationRouter.get(
   applicationController.getAllApplications.bind(applicationController)
 );
 
+applicationRouter.post(
+  "/",
+  applicationController.createApplication.bind(applicationController)
+);
+
 export { applicationRouter };

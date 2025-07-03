@@ -1,5 +1,9 @@
 import { NewApplication } from "../types.js";
 
+type NewApplicationJson = Omit<NewApplication, "availableStartDate"> & {
+  availableStartDate?: string;
+};
+
 export const createApplicationFixture = (
   overrides: Partial<NewApplication> = {}
 ): NewApplication => {
@@ -12,6 +16,27 @@ export const createApplicationFixture = (
     resumeUrl: "https://drive.google.com/file/d/mi-cv/view",
     expectedSalary: 4500000,
     availableStartDate: new Date("2025-08-01"),
+    internalNotes: "Recordar mencionar experiencia con React en la entrevista",
+  };
+
+  return {
+    ...baseApplication,
+    ...overrides,
+  };
+};
+
+export const createApplicationJsonFixture = (
+  overrides: Partial<NewApplicationJson> = {}
+): NewApplicationJson => {
+  const baseApplication: NewApplicationJson = {
+    positionTitle: "Desarrollador Frontend",
+    company: "TechCorp España",
+    status: "pending",
+    coverLetter:
+      "Estimados señores, me dirijo a ustedes para expresar mi interés en la posición de Desarrollador Frontend...",
+    resumeUrl: "https://drive.google.com/file/d/mi-cv/view",
+    expectedSalary: 4500000,
+    availableStartDate: "2025-08-01T00:00:00.000Z",
     internalNotes: "Recordar mencionar experiencia con React en la entrevista",
   };
 
