@@ -8,7 +8,7 @@
     "build": "tsc",
     "build:dev": "tsc --watch",
     "start": "node .",
-    "start:dev": "node -w .",
+    "start:dev": "node . -w",
     "lint": "oxlint src",
     "lint:fix": "oxlint src --fix"
   },
@@ -16,6 +16,14 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "oxlint": "^1.5.0"
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.10",
+    "oxlint": "^1.5.0",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "dotenv": "^17.0.1",
+    "express": "^5.1.0"
   }
 }
