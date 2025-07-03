@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { applicationService } from "../service/application.service.js";
+import type { ApplicationsResponse } from "../types.js";
 
 export class ApplicationController {
   async getAllApplications(
@@ -10,10 +11,12 @@ export class ApplicationController {
     try {
       const applications = await applicationService.getAllApplications();
 
-      res.status(200).json({
+      const response: ApplicationsResponse = {
         data: applications,
         count: applications.length,
-      });
+      };
+
+      res.status(200).json(response);
     } catch (error) {
       console.error("Controller error:", error);
       next(error);
