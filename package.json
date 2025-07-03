@@ -1,0 +1,21 @@
+{
+  "name": "seleccioneitor-back",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "build:dev": "tsc --watch",
+    "start": "node .",
+    "start:dev": "node -w .",
+    "lint": "oxlint src",
+    "lint:fix": "oxlint src --fix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "oxlint": "^1.5.0"
+  }
+}

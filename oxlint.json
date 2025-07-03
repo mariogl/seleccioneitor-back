@@ -1,0 +1,29 @@
+{
+  "rules": {
+    "typescript": {
+      "no-explicit-any": "warn",
+      "no-unused-vars": "warn",
+      "prefer-const": "warn"
+    },
+    "eslint": {
+      "no-unused-vars": "warn",
+      "no-console": "warn",
+      "prefer-const": "warn",
+      "no-var": "error",
+      "eqeqeq": "error"
+    },
+    "unicorn": {
+      "prefer-node-protocol": "warn"
+    }
+  },
+  "env": {
+    "node": true,
+    "es2022": true
+  },
+  "globals": {
+    "console": "readonly",
+    "process": "readonly",
+    "Buffer": "readonly"
+  },
+  "ignore_patterns": ["node_modules/**", "dist/**", "*.min.js"]
+}
