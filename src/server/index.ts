@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import checkHealth from "./healthCheck/index.js";
 import handleNotFound from "./handleNotFound/index.js";
 import handleErrors from "./handleErrors/index.js";
@@ -6,6 +7,7 @@ import { applicationRouter } from "../entities/application/routes/application.ro
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 app.get("/", checkHealth);
