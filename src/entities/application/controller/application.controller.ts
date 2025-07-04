@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { applicationService } from "../service/application.service.js";
 import type { ApplicationsResponse, NewApplication } from "../types.js";
+import { mapApplicationToApiResponse } from "../schema/mappers.js";
 
 export class ApplicationController {
   async getAllApplications(
@@ -12,7 +13,7 @@ export class ApplicationController {
       const applications = await applicationService.getAllApplications();
 
       const response: ApplicationsResponse = {
-        applications: applications,
+        applications: applications.map(mapApplicationToApiResponse),
         count: applications.length,
       };
 
@@ -42,7 +43,7 @@ export class ApplicationController {
         applicationData
       );
 
-      res.status(201).json(newApplication);
+      res.status(201).json(mapApplicationToApiResponse(newApplication));
     } catch (error) {
       console.error("Controller error:", error);
       next(error);

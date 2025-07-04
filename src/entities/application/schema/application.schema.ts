@@ -7,6 +7,7 @@ import {
   pgEnum,
   integer,
 } from "drizzle-orm/pg-core";
+import { ConvertNullablesIntoOptional } from "../../../types.js";
 
 export const applicationStatusEnum = pgEnum("application_status", [
   "pending",
@@ -32,5 +33,28 @@ export const applications = pgTable("applications", {
   internalNotes: text("internal_notes"),
 });
 
-export type Application = typeof applications.$inferSelect;
-export type NewApplication = typeof applications.$inferInsert;
+export type ApplicationSchema = typeof applications.$inferSelect;
+export type NewApplicationSchema = typeof applications.$inferInsert;
+export type Application = ConvertNullablesIntoOptional<ApplicationSchema>;
+export type NewApplication = ConvertNullablesIntoOptional<NewApplicationSchema>;
+
+export interface ApplicationApiResponse {
+  id: number;
+  positionTitle: string;
+  company: string;
+  status:
+    | "pending"
+    | "reviewing"
+    | "interview_scheduled"
+    | "interviewed"
+    | "accepted"
+    | "rejected"
+    | "withdrawn";
+  appliedAt: string;
+  updatedAt: string;
+  coverLetter?: string;
+  resumeUrl?: string;
+  expectedSalary?: number;
+  availableStartDate?: string;
+  internalNotes?: string;
+}
