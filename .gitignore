@@ -4,3 +4,4 @@ coverage
 .env
 copilot-instructions.md
 CLAUDE.md
+swagger-spec.json
