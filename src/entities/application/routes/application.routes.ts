@@ -13,4 +13,9 @@ applicationRouter.post(
   applicationController.createApplication.bind(applicationController)
 );
 
+applicationRouter.delete(
+  "/:id",
+  applicationController.deleteApplication.bind(applicationController)
+);
+
 export { applicationRouter };

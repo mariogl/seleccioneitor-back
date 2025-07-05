@@ -3,6 +3,7 @@ import { applications } from "../schema/application.schema.js";
 import type { Application, NewApplication } from "../types.js";
 import type { ApplicationRepository } from "./application.repository.interface.js";
 import { mapApplicationSchemaToApplication } from "../schema/mappers.js";
+import { eq } from "drizzle-orm";
 
 export class DrizzleApplicationRepository implements ApplicationRepository {
   async findAll(): Promise<Application[]> {
@@ -16,5 +17,9 @@ export class DrizzleApplicationRepository implements ApplicationRepository {
       .values(applicationData)
       .returning();
     return mapApplicationSchemaToApplication(newApplication);
+  }
+
+  async delete(id: number): Promise<void> {
+    await db.delete(applications).where(eq(applications.id, id));
   }
 }

@@ -24,6 +24,15 @@ export class ApplicationService {
       throw new Error("Failed to create application");
     }
   }
+
+  async deleteApplication(id: number): Promise<void> {
+    try {
+      await this.applicationRepository.delete(id);
+    } catch (error) {
+      console.error("Error deleting application:", error);
+      throw new Error("Failed to delete application");
+    }
+  }
 }
 
 export const applicationService = new ApplicationService(

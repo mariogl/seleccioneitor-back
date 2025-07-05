@@ -8,5 +8,8 @@ export default defineConfig({
     },
     globalSetup: ["./src/test-utils/global-setup.ts"],
     setupFiles: ["./src/test-utils/test-setup.ts"],
+    sequence: {
+      concurrent: false,
+    },
   },
 });

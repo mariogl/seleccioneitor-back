@@ -49,6 +49,27 @@ export class ApplicationController {
       next(error);
     }
   }
+
+  async deleteApplication(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const id = parseInt(req.params.id);
+
+      if (Number.isNaN(id)) {
+        res.status(400).json({ error: "Invalid ID" });
+        return;
+      }
+
+      await applicationService.deleteApplication(id);
+      res.status(200).json({ message: "Application deleted successfully" });
+    } catch (error) {
+      console.error("Controller error:", error);
+      next(error);
+    }
+  }
 }
 
 export const applicationController = new ApplicationController();
