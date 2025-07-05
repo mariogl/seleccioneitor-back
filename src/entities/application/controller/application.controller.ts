@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { applicationService } from "../service/application.service.js";
 import type { ApplicationsResponse, NewApplication } from "../types.js";
 import { mapApplicationToApiResponse } from "../schema/mappers.js";
+import { ValidationError } from "../../../errors/index.js";
 
 export class ApplicationController {
   async getAllApplications(
@@ -19,7 +20,6 @@ export class ApplicationController {
 
       res.status(200).json(response);
     } catch (error) {
-      console.error("Controller error:", error);
       next(error);
     }
   }
@@ -32,7 +32,6 @@ export class ApplicationController {
     try {
       const applicationData = req.body as NewApplication;
 
-      // Convert date strings to Date objects if present
       if (applicationData.availableStartDate) {
         applicationData.availableStartDate = new Date(
           applicationData.availableStartDate
@@ -45,7 +44,6 @@ export class ApplicationController {
 
       res.status(201).json(mapApplicationToApiResponse(newApplication));
     } catch (error) {
-      console.error("Controller error:", error);
       next(error);
     }
   }
@@ -59,14 +57,12 @@ export class ApplicationController {
       const id = parseInt(req.params.id);
 
       if (Number.isNaN(id)) {
-        res.status(400).json({ error: "Invalid ID" });
-        return;
+        throw new ValidationError("Invalid ID", "id");
       }
 
       await applicationService.deleteApplication(id);
       res.status(200).json({ message: "Application deleted successfully" });
     } catch (error) {
-      console.error("Controller error:", error);
       next(error);
     }
   }

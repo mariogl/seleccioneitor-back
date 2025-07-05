@@ -2,8 +2,13 @@ import request from "supertest";
 import app from "../../../../server/index.js";
 import type { Application } from "../../types.js";
 import { createApplicationJsonFixture } from "../../fixtures/application.fixtures.js";
+import { clearApplications } from "../../fixtures/index.js";
 
 describe("POST /applications", () => {
+  afterEach(async () => {
+    await clearApplications();
+  });
+
   it("should create a new application", async () => {
     const newApplicationData = createApplicationJsonFixture({
       positionTitle: "Desarrollador TypeScript",

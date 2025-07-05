@@ -1,21 +1,29 @@
 import request from "supertest";
 import app from "../../../../server/index.js";
-import type { ApplicationsResponse } from "../../types.js";
+import type { ApplicationsResponse, Application } from "../../types.js";
+import { createApplicationJsonFixture } from "../../fixtures/application.fixtures.js";
+import { clearApplications } from "../../fixtures/index.js";
 
 describe("DELETE /applications/:id", () => {
+  afterEach(async () => {
+    await clearApplications();
+  });
+
   it("should delete an application", async () => {
-    const getResponse = await request(app).get("/applications").expect(200);
-    const initialBody = getResponse.body as ApplicationsResponse;
-    const initialCount = initialBody.count;
+    const newApplicationData = createApplicationJsonFixture({
+      positionTitle: "Test Developer Position",
+      company: "Test Company for Deletion",
+    });
 
-    if (initialCount === 0) {
-      return;
-    }
+    const createResponse = await request(app)
+      .post("/applications")
+      .send(newApplicationData)
+      .expect(201);
 
-    const firstApplication = initialBody.applications[0];
+    const createdApplication = createResponse.body as Application;
 
     const deleteResponse = await request(app)
-      .delete(`/applications/${firstApplication.id}`)
+      .delete(`/applications/${createdApplication.id}`)
       .expect(200);
 
     expect(deleteResponse.body).toEqual({
@@ -27,9 +35,10 @@ describe("DELETE /applications/:id", () => {
       .expect(200);
     const afterDeleteBody = afterDeleteResponse.body as ApplicationsResponse;
 
-    expect(afterDeleteBody.count).toBe(initialCount - 1);
     expect(
-      afterDeleteBody.applications.find((app) => app.id === firstApplication.id)
+      afterDeleteBody.applications.find(
+        (app) => app.id === createdApplication.id
+      )
     ).toBeUndefined();
   });
 
@@ -38,16 +47,7 @@ describe("DELETE /applications/:id", () => {
       .delete("/applications/invalid")
       .expect(400);
 
-    expect(response.body).toEqual({
-      error: "Invalid ID",
-    });
-  });
-
-  it("should return 400 for non-numeric ID", async () => {
-    const response = await request(app).delete("/applications/abc").expect(400);
-
-    expect(response.body).toEqual({
-      error: "Invalid ID",
-    });
+    expect(response.body.status).toBe("error");
+    expect(response.body.message).toBe("Invalid ID");
   });
 });

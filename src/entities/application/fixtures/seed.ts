@@ -4,7 +4,9 @@ import { seedApplicationsData } from "./application.fixtures.js";
 import { sql } from "drizzle-orm";
 
 export const seedApplications = async () => {
-  await db.insert(applications).values(seedApplicationsData);
+  for await (const application of seedApplicationsData) {
+    await db.insert(applications).values(application);
+  }
 };
 
 export const clearApplications = async () => {
