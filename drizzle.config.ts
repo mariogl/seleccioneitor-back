@@ -1,5 +1,5 @@
-import { defineConfig } from "drizzle-kit";
 import "dotenv/config";
+import { defineConfig } from "drizzle-kit";
 
 const getDatabaseName = (): string => {
   if (process.env.NODE_ENV === "test") {
@@ -10,7 +10,7 @@ const getDatabaseName = (): string => {
 
 export default defineConfig({
   dialect: "postgresql",
-  schema: "./src/entities/application/schema/application.schema.ts",
+  schema: "./dist/db/schema/index.js",
   out: "./drizzle",
   dbCredentials: {
     url: `postgresql://${process.env.POSTGRES_USER}:${

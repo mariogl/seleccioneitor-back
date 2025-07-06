@@ -30,7 +30,7 @@ export class ApplicationService {
         );
       }
 
-      if (!applicationData.company?.trim()) {
+      if (!applicationData.companyId) {
         throw new ValidationError("Company is required", "company");
       }
 

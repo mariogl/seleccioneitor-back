@@ -41,9 +41,7 @@ const options: swaggerJSDoc.Options = {
               example: "Desarrollador Frontend",
             },
             company: {
-              type: "string",
-              description: "Nombre de la empresa",
-              example: "TechCorp España",
+              $ref: "#/components/schemas/Company",
             },
             status: {
               type: "string",
@@ -101,17 +99,17 @@ const options: swaggerJSDoc.Options = {
         },
         NewApplication: {
           type: "object",
-          required: ["positionTitle", "company"],
+          required: ["positionTitle", "companyId"],
           properties: {
             positionTitle: {
               type: "string",
               description: "Título del puesto",
               example: "Desarrollador Frontend",
             },
-            company: {
-              type: "string",
-              description: "Nombre de la empresa",
-              example: "TechCorp España",
+            companyId: {
+              type: "integer",
+              description: "ID de la empresa",
+              example: 1,
             },
             status: {
               type: "string",
@@ -153,6 +151,54 @@ const options: swaggerJSDoc.Options = {
               type: "string",
               description: "Notas internas",
               example: "Recordar mencionar experiencia con React",
+            },
+          },
+        },
+        Company: {
+          type: "object",
+          required: ["id", "name"],
+          properties: {
+            id: {
+              type: "integer",
+              description: "ID único de la empresa",
+              example: 1,
+            },
+            name: {
+              type: "string",
+              description: "Nombre de la empresa",
+              example: "TechCorp España",
+            },
+            description: {
+              type: "string",
+              description: "Descripción de la empresa",
+              example: "Empresa líder en tecnología",
+            },
+            industry: {
+              type: "string",
+              description: "Industria de la empresa",
+              example: "Technology",
+            },
+            location: {
+              type: "string",
+              description: "Ubicación de la empresa",
+              example: "Madrid, España",
+            },
+            website: {
+              type: "string",
+              description: "Sitio web de la empresa",
+              example: "https://techcorp.es",
+            },
+            createdAt: {
+              type: "string",
+              format: "date-time",
+              description: "Fecha de creación",
+              example: "2025-07-05T10:30:00.000Z",
+            },
+            updatedAt: {
+              type: "string",
+              format: "date-time",
+              description: "Fecha de última actualización",
+              example: "2025-07-05T10:30:00.000Z",
             },
           },
         },

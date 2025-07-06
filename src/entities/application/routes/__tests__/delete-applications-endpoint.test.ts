@@ -1,18 +1,27 @@
 import request from "supertest";
 import app from "../../../../server/index.js";
-import type { ApplicationsResponse, Application } from "../../types.js";
+import type { Application, ApplicationsResponse } from "../../types.js";
 import { createApplicationJsonFixture } from "../../fixtures/application.fixtures.js";
 import { clearApplications } from "../../fixtures/index.js";
+import {
+  seedCompanies,
+  clearCompanies,
+} from "../../../company/fixtures/index.js";
 
 describe("DELETE /applications/:id", () => {
+  beforeEach(async () => {
+    await seedCompanies();
+  });
+
   afterEach(async () => {
     await clearApplications();
+    await clearCompanies();
   });
 
   it("should delete an application", async () => {
     const newApplicationData = createApplicationJsonFixture({
       positionTitle: "Test Developer Position",
-      company: "Test Company for Deletion",
+      companyId: 1, // Test Company for Deletion
     });
 
     const createResponse = await request(app)

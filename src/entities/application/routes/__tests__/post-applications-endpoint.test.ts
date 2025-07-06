@@ -3,16 +3,25 @@ import app from "../../../../server/index.js";
 import type { Application } from "../../types.js";
 import { createApplicationJsonFixture } from "../../fixtures/application.fixtures.js";
 import { clearApplications } from "../../fixtures/index.js";
+import {
+  seedCompanies,
+  clearCompanies,
+} from "../../../company/fixtures/index.js";
 
 describe("POST /applications", () => {
+  beforeEach(async () => {
+    await seedCompanies();
+  });
+
   afterEach(async () => {
     await clearApplications();
+    await clearCompanies();
   });
 
   it("should create a new application", async () => {
     const newApplicationData = createApplicationJsonFixture({
       positionTitle: "Desarrollador TypeScript",
-      company: "Nueva Empresa SL",
+      companyId: 1, // Nueva Empresa SL
       availableStartDate: "2025-09-01T00:00:00.000Z",
       internalNotes: "Nueva aplicación creada via API",
     });
@@ -27,7 +36,7 @@ describe("POST /applications", () => {
     expect(createdApplication.positionTitle).toBe(
       newApplicationData.positionTitle
     );
-    expect(createdApplication.company).toBe(newApplicationData.company);
+    expect(createdApplication.company.id).toBe(newApplicationData.companyId);
     expect(createdApplication.status).toBe(newApplicationData.status);
     expect(createdApplication.expectedSalary).toBe(
       newApplicationData.expectedSalary
@@ -37,7 +46,7 @@ describe("POST /applications", () => {
   it("should create application with only required fields", async () => {
     const minimalApplicationData = createApplicationJsonFixture({
       positionTitle: "Backend Developer",
-      company: "Minimal Corp",
+      companyId: 2, // Minimal Corp
     });
 
     const response = await request(app)
@@ -50,7 +59,9 @@ describe("POST /applications", () => {
     expect(createdApplication.positionTitle).toBe(
       minimalApplicationData.positionTitle
     );
-    expect(createdApplication.company).toBe(minimalApplicationData.company);
+    expect(createdApplication.company.id).toBe(
+      minimalApplicationData.companyId
+    );
     expect(createdApplication.status).toBe("pending");
   });
 });

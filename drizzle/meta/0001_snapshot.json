@@ -1,6 +1,6 @@
 {
-  "id": "e65cdf23-4a8d-4c49-9dfd-a79f3a3ddb2b",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "7cd41afe-6424-4ff1-a21f-746153fa73fa",
+  "prevId": "e65cdf23-4a8d-4c49-9dfd-a79f3a3ddb2b",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -20,9 +20,9 @@
           "primaryKey": false,
           "notNull": true
         },
-        "company": {
-          "name": "company",
-          "type": "varchar(255)",
+        "company_id": {
+          "name": "company_id",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
@@ -80,7 +80,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "applications_company_id_companies_id_fk": {
+          "name": "applications_company_id_companies_id_fk",
+          "tableFrom": "applications",
+          "tableTo": "companies",
+          "columnsFrom": [
+            "company_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},

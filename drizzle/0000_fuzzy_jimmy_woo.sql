@@ -12,3 +12,16 @@ CREATE TABLE "applications" (
 	"updated_at" timestamp DEFAULT now() NOT NULL,
 	"internal_notes" text
 );
+--> statement-breakpoint
+CREATE TABLE "companies" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"name" varchar(255) NOT NULL,
+	"description" text,
+	"website" varchar(500),
+	"location" varchar(255),
+	"email" varchar(255),
+	"phone" varchar(50),
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL,
+	"notes" text
+);

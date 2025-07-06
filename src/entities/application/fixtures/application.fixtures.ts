@@ -9,7 +9,7 @@ export const createApplicationFixture = (
 ): NewApplication => {
   const baseApplication: NewApplication = {
     positionTitle: "Desarrollador Frontend",
-    company: "TechCorp España",
+    companyId: 1, // Asumimos que existe una company con ID 1
     status: "pending",
     coverLetter:
       "Estimados señores, me dirijo a ustedes para expresar mi interés en la posición de Desarrollador Frontend...",
@@ -30,7 +30,7 @@ export const createApplicationJsonFixture = (
 ): NewApplicationJson => {
   const baseApplication: NewApplicationJson = {
     positionTitle: "Desarrollador Frontend",
-    company: "TechCorp España",
+    companyId: 1, // Asumimos que existe una company con ID 1
     status: "pending",
     coverLetter:
       "Estimados señores, me dirijo a ustedes para expresar mi interés en la posición de Desarrollador Frontend...",
@@ -50,7 +50,7 @@ export const applicationFixtures = {
   pending: () =>
     createApplicationFixture({
       positionTitle: "Desarrollador Backend",
-      company: "Startup Madrid",
+      companyId: 2, // Startup Madrid
       status: "pending",
       expectedSalary: 4200000,
       internalNotes: "Aplicado hace 2 días, esperando respuesta",
@@ -59,7 +59,7 @@ export const applicationFixtures = {
   reviewing: () =>
     createApplicationFixture({
       positionTitle: "Full Stack Developer",
-      company: "Iberdrola Digital",
+      companyId: 3, // Iberdrola Digital
       status: "reviewing",
       expectedSalary: 5500000,
       internalNotes: "RRHH confirmó recepción, están revisando mi perfil",
@@ -68,7 +68,7 @@ export const applicationFixtures = {
   interviewScheduled: () =>
     createApplicationFixture({
       positionTitle: "Senior React Developer",
-      company: "Mercadona Tech",
+      companyId: 4, // Mercadona Tech
       status: "interview_scheduled",
       expectedSalary: 6000000,
       availableStartDate: new Date("2025-09-15"),
@@ -78,7 +78,7 @@ export const applicationFixtures = {
   interviewed: () =>
     createApplicationFixture({
       positionTitle: "Ingeniero DevOps",
-      company: "BBVA Next",
+      companyId: 5, // BBVA Next
       status: "interviewed",
       expectedSalary: 5800000,
       internalNotes: "Entrevista técnica completada, esperando feedback",
@@ -87,7 +87,7 @@ export const applicationFixtures = {
   accepted: () =>
     createApplicationFixture({
       positionTitle: "Desarrollador UI/UX",
-      company: "Zara Tech",
+      companyId: 6, // Zara Tech
       status: "accepted",
       expectedSalary: 4800000,
       availableStartDate: new Date("2025-07-15"),
@@ -97,7 +97,7 @@ export const applicationFixtures = {
   rejected: () =>
     createApplicationFixture({
       positionTitle: "Desarrollador Mobile",
-      company: "Glovo",
+      companyId: 7, // Glovo
       status: "rejected",
       expectedSalary: 5200000,
       internalNotes: "No seguimos adelante, buscan más experiencia en Flutter",
@@ -106,7 +106,7 @@ export const applicationFixtures = {
   withdrawn: () =>
     createApplicationFixture({
       positionTitle: "Data Engineer",
-      company: "Cabify",
+      companyId: 8, // Cabify
       status: "withdrawn",
       expectedSalary: 6500000,
       internalNotes: "Retiré candidatura - acepté otra oferta mejor",

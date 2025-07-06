@@ -1,16 +1,30 @@
-import {
-  Application,
-  ApplicationSchema,
-  ApplicationApiResponse,
-} from "./application.schema.js";
+import { CompanySchema } from "../../company/schema/company.schema.js";
+import { Company } from "../../company/types.js";
+import { Application, ApplicationApiResponse } from "../types.js";
+import { ApplicationSchema } from "./application.schema.js";
+
+function convertCompanySchemaToCompany(companySchema: CompanySchema): Company {
+  return {
+    id: companySchema.id,
+    name: companySchema.name,
+    createdAt: companySchema.createdAt,
+    updatedAt: companySchema.updatedAt,
+    ...(companySchema.description !== null && { description: companySchema.description }),
+    ...(companySchema.website !== null && { website: companySchema.website }),
+    ...(companySchema.location !== null && { location: companySchema.location }),
+    ...(companySchema.email !== null && { email: companySchema.email }),
+    ...(companySchema.phone !== null && { phone: companySchema.phone }),
+    ...(companySchema.notes !== null && { notes: companySchema.notes }),
+  };
+}
 
 export function mapApplicationSchemaToApplication(
-  dbRecord: ApplicationSchema
+  dbRecord: ApplicationSchema,
+  company: CompanySchema
 ): Application {
   const {
     id,
     positionTitle,
-    company,
     status,
     appliedAt,
     updatedAt,
@@ -24,7 +38,7 @@ export function mapApplicationSchemaToApplication(
   const application: Application = {
     id,
     positionTitle,
-    company,
+    company: convertCompanySchemaToCompany(company),
     status,
     appliedAt,
     updatedAt,
@@ -55,7 +69,7 @@ export function mapApplicationToApplicationSchema(
   const applicationSchema: ApplicationSchema = {
     id: application.id,
     positionTitle: application.positionTitle,
-    company: application.company,
+    companyId: application.company.id,
     status: application.status,
     appliedAt: application.appliedAt,
     updatedAt: application.updatedAt,
