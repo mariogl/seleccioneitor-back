@@ -7,7 +7,6 @@ export default defineConfig({
       NODE_ENV: "test",
     },
     globalSetup: ["./src/test-utils/global-setup.ts"],
-    setupFiles: ["./src/test-utils/test-setup.ts"],
     pool: "forks",
     poolOptions: {
       forks: {

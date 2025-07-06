@@ -21,7 +21,7 @@ describe("DELETE /applications/:id", () => {
   it("should delete an application", async () => {
     const newApplicationData = createApplicationJsonFixture({
       positionTitle: "Test Developer Position",
-      companyId: 1, // Test Company for Deletion
+      companyId: 1,
     });
 
     const createResponse = await request(app)

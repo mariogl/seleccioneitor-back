@@ -69,8 +69,8 @@ const options: swaggerJSDoc.Options = {
             },
             expectedSalary: {
               type: "integer",
-              description: "Salario esperado en centavos",
-              example: 4500000,
+              description: "Salario esperado en euros",
+              example: 45000,
             },
             availableStartDate: {
               type: "string",
@@ -138,8 +138,8 @@ const options: swaggerJSDoc.Options = {
             },
             expectedSalary: {
               type: "integer",
-              description: "Salario esperado en centavos",
-              example: 4500000,
+              description: "Salario esperado en euros",
+              example: 45000,
             },
             availableStartDate: {
               type: "string",
@@ -156,7 +156,7 @@ const options: swaggerJSDoc.Options = {
         },
         Company: {
           type: "object",
-          required: ["id", "name"],
+          required: ["id", "name", "createdAt", "updatedAt"],
           properties: {
             id: {
               type: "integer",
@@ -173,11 +173,6 @@ const options: swaggerJSDoc.Options = {
               description: "Descripción de la empresa",
               example: "Empresa líder en tecnología",
             },
-            industry: {
-              type: "string",
-              description: "Industria de la empresa",
-              example: "Technology",
-            },
             location: {
               type: "string",
               description: "Ubicación de la empresa",
@@ -187,6 +182,21 @@ const options: swaggerJSDoc.Options = {
               type: "string",
               description: "Sitio web de la empresa",
               example: "https://techcorp.es",
+            },
+            email: {
+              type: "string",
+              description: "Email de contacto",
+              example: "rrhh@techcorp.es",
+            },
+            phone: {
+              type: "string",
+              description: "Teléfono de contacto",
+              example: "+34 910 123 456",
+            },
+            notes: {
+              type: "string",
+              description: "Notas internas",
+              example: "Empresa con buen ambiente de trabajo",
             },
             createdAt: {
               type: "string",
@@ -243,7 +253,10 @@ const options: swaggerJSDoc.Options = {
       },
     },
   },
-  apis: ["./src/entities/application/routes/*.ts"],
+  apis: [
+    "./src/entities/application/routes/*.ts",
+    "./src/entities/company/routes/*.ts",
+  ],
 };
 
 const specs = swaggerJSDoc(options);

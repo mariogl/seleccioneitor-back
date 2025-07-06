@@ -21,7 +21,7 @@ describe("POST /applications", () => {
   it("should create a new application", async () => {
     const newApplicationData = createApplicationJsonFixture({
       positionTitle: "Desarrollador TypeScript",
-      companyId: 1, // Nueva Empresa SL
+      companyId: 1,
       availableStartDate: "2025-09-01T00:00:00.000Z",
       internalNotes: "Nueva aplicación creada via API",
     });
@@ -46,7 +46,7 @@ describe("POST /applications", () => {
   it("should create application with only required fields", async () => {
     const minimalApplicationData = createApplicationJsonFixture({
       positionTitle: "Backend Developer",
-      companyId: 2, // Minimal Corp
+      companyId: 2,
     });
 
     const response = await request(app)

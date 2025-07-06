@@ -1,6 +1,5 @@
 import "dotenv/config.js";
 
-// Environment variable guards
 const requiredEnvironmentVariables = [
   "POSTGRES_HOST",
   "POSTGRES_PORT",

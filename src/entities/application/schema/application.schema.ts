@@ -29,7 +29,7 @@ export const applications = pgTable("applications", {
   status: applicationStatusEnum("status").default("pending").notNull(),
   coverLetter: text("cover_letter"),
   resumeUrl: varchar("resume_url", { length: 500 }),
-  expectedSalary: integer("expected_salary"), // in cents to avoid float precision issues
+  expectedSalary: integer("expected_salary"),
   availableStartDate: timestamp("available_start_date"),
   appliedAt: timestamp("applied_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),

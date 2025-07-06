@@ -25,7 +25,11 @@ export class ApplicationController {
   }
 
   async createApplication(
-    req: Request,
+    req: Request<
+      Record<string, unknown>,
+      Record<string, unknown>,
+      NewApplication
+    >,
     res: Response,
     next: NextFunction
   ): Promise<void> {
@@ -49,7 +53,7 @@ export class ApplicationController {
   }
 
   async deleteApplication(
-    req: Request,
+    req: Request<{ id: string }, Record<string, unknown>>,
     res: Response,
     next: NextFunction
   ): Promise<void> {
