@@ -33,4 +33,9 @@ export class DrizzleCompanyRepository implements CompanyRepository {
 
     return mapCompanySchemaToCompany(newCompany);
   }
+
+  async findAll(): Promise<Company[]> {
+    const result = await db.select().from(companies).orderBy(companies.name);
+    return result.map(mapCompanySchemaToCompany);
+  }
 }

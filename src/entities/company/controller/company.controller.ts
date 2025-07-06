@@ -18,6 +18,19 @@ export class CompanyController {
       next(error);
     }
   }
+
+  async getAllCompanies(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const companies = await companyService.getAllCompanies();
+      res.status(200).json(companies);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export const companyController = new CompanyController();

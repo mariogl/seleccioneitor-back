@@ -21,6 +21,15 @@ export class CompanyService {
       throw new InternalServerError("Failed to create company");
     }
   }
+
+  async getAllCompanies(): Promise<Company[]> {
+    try {
+      return await this.companyRepository.findAll();
+    } catch (error) {
+      console.error("Error fetching companies:", error);
+      throw new InternalServerError("Failed to fetch companies");
+    }
+  }
 }
 
 export const companyService = new CompanyService(

@@ -73,4 +73,33 @@ companyRouter.post(
   companyController.createCompany.bind(companyController)
 );
 
+/**
+ * @swagger
+ * /companies:
+ *   get:
+ *     summary: Listar todas las empresas
+ *     description: Obtiene una lista de todas las empresas ordenadas alfabéticamente
+ *     tags:
+ *       - Companies
+ *     responses:
+ *       200:
+ *         description: Lista de empresas obtenida exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Company'
+ *       500:
+ *         description: Error interno del servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ */
+companyRouter.get(
+  "/",
+  companyController.getAllCompanies.bind(companyController)
+);
+
 export default companyRouter;
